@@ -2,6 +2,7 @@
 
 A flexible and customizable form widget for Flutter that allows for dynamic form creation with validation, custom labels, styling, and more.
 ## Example
+```dart
 import 'package:custom_form_w/custom_form_w.dart';
 import 'package:flutter/material.dart';
 
@@ -43,7 +44,7 @@ class MyHomePage extends StatelessWidget {
     );
   }
 }
-
+```
 ## Features
 - Create dynamic forms with a specified number of fields.
 - Highlight required fields with asterisks (*).
