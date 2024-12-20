@@ -18,13 +18,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Custom Form Widget',
-      home: const MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  MyHomePage({super.key});
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -35,15 +36,33 @@ class MyHomePage extends StatelessWidget {
         children: [
           Center(
             child: CustomFormW(
-            numberOfFields: 5,
-            requiredFieldIndices: [1, 2, 4],
-            labelText: ['Name', 'Email', 'Phone', 'Address', 'City'],
-          )),
+              formKey: _formKey, 
+              onSubmit: () {
+                print('Submitted');
+              },
+              numberOfFields: 5,
+              requiredFieldIndices: [1, 2, 4],
+              labelText: ['Name', 'Email', 'Phone', 'Address', 'City'],
+              // Added some optional parameters 
+              fillColor: Colors.white,
+              buttonColor: Colors.blue,
+              radius: 8,
+              spacing: 15,
+              keyboardType: [
+                TextInputType.name,
+                TextInputType.emailAddress,
+                TextInputType.phone,
+                TextInputType.streetAddress,
+                TextInputType.text
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
 }
+
 ```
 ## Features
 - Create dynamic forms with a specified number of fields.
@@ -86,5 +105,5 @@ Add this to your `pubspec.yaml` file:
 dependencies:
   custom_form_w: ^0.0.2
 ```
+## Then run `flutter pub get`
 
-then run `flutter pub get`

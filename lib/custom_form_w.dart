@@ -60,83 +60,84 @@ class CustomFormW extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: SingleChildScrollView(
-        child: Column(
-          spacing: spacing ?? 10,
-          children: [
-            Column(
-              spacing: spacing ?? 10,
-              children: List.generate(numberOfFields, (index) => Directionality(
-                textDirection: textDirection ?? TextDirection.ltr,
-                child: TextFormField(
-                  keyboardType: keyboardType?[index],
-                  key: formKey,
-                  controller: controllers?[index],
-                  textDirection: textDirection,
-                  decoration: InputDecoration(
-            
-                    labelText:withoutBorder == true ? null:'${labelText[index]}${requiredFieldIndices.contains(index+1) ? ' *' : ''}',
-                    labelStyle:  labelStyle ?? TextStyle(color: requiredFieldIndices.contains(index+1) ? requiredColor ?? Colors.red : labelColor ?? Colors.black   ),
-                    hintText:hintText?[index] ?? 'Enter ${labelText[index]}',
-                    hintStyle: hintStyle ?? TextStyle(color: Colors.grey.withValues(alpha: 0.5)),
-                    hintTextDirection: textDirection,
-                    filled: true,
-                    fillColor:fillColor,
-                    suffixIcon: suffixIcon,
-                    prefixIcon: prefixIcon,
-                    border: withoutBorder == true ? InputBorder.none : OutlineInputBorder(),
-                    enabledBorder: withoutBorder == true ? InputBorder.none : OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(radius ?? 10),
-                      borderSide: BorderSide(color: enabledBorderColor ?? Colors.grey.withValues(alpha: 0.5)),
+    return Form(
+      key: formKey,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: SingleChildScrollView(
+          child: Column(
+            spacing: spacing ?? 10,
+            children: [
+              Column(
+                spacing: spacing ?? 10,
+                children: List.generate(numberOfFields, (index) => Directionality(
+                  textDirection: textDirection ?? TextDirection.ltr,
+                  child: TextFormField(
+                    keyboardType: keyboardType?[index],
+                    controller: controllers?[index],
+                    textDirection: textDirection,
+                    decoration: InputDecoration(
+                      labelText:withoutBorder == true ? null:'${labelText[index]}${requiredFieldIndices.contains(index+1) ? ' *' : ''}',
+                      labelStyle:  labelStyle ?? TextStyle(color: requiredFieldIndices.contains(index+1) ? requiredColor ?? Colors.red : labelColor ?? Colors.black   ),
+                      hintText:hintText?[index] ?? 'Enter ${labelText[index]}',
+                      hintStyle: hintStyle ?? TextStyle(color: Colors.grey.withOpacity(0.5)),
+                      hintTextDirection: textDirection,
+                      filled: true,
+                      fillColor:fillColor,
+                      suffixIcon: suffixIcon,
+                      prefixIcon: prefixIcon,
+                      border: withoutBorder == true ? InputBorder.none : OutlineInputBorder(),
+                      enabledBorder: withoutBorder == true ? InputBorder.none : OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(radius ?? 10),
+                        borderSide: BorderSide(color: enabledBorderColor ?? Colors.grey.withOpacity(0.5)),
+                      ),
+                      focusedBorder: withoutBorder == true ? InputBorder.none : OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(radius ?? 10),
+                        borderSide: BorderSide(color: focusedBorderColor ?? Colors.grey.withOpacity(0.5)),
+                      ),
                     ),
-                    focusedBorder: withoutBorder == true ? InputBorder.none : OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(radius ?? 10),
-                      borderSide: BorderSide(color: focusedBorderColor ?? Colors.grey.withValues(alpha: 0.5)),
-                    ),
+                    validator: (value) {
+                      if (requiredFieldIndices.contains(index+1) && (value == null || value.isEmpty)) {
+                        return 'Please enter ${labelText[index]}';
+                      }
+                      if (numberOfFields <= 0) {
+                        return 'Number of fields must be greater than 0';
+                      }
+                      return null;
+                    },
                   ),
-                  validator: (value) {
-                    if (requiredFieldIndices.contains(index+1) && (value == null || value.isEmpty)) {
-                      return 'Please enter ${labelText[index]}';
-                    }
-                    if (numberOfFields <= 0) {
-                      return 'Number of fields must be greater than 0';
-                    }
-                    return null;
-                  },
+                )),
+              ), 
+              showButton == true ? MaterialButton(
+                minWidth: .9*MediaQuery.sizeOf(context).width,
+                height: 45,
+                color: buttonColor,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5),
                 ),
-              )),
-
-            ), 
-        showButton == true ? MaterialButton(
-              minWidth: .9*MediaQuery.sizeOf(context).width,
-              height: 45,
-              color: buttonColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(5),
-              ),
-              onPressed: () {
-                if (formKey?.currentState?.validate() ?? false) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.green,
-                    margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 90),
-                    content: Text('Form is valid')));
-                }else{
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    behavior: SnackBarBehavior.floating,
-                    backgroundColor: Colors.red,
-                    margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 90),
-                    content: Text('Form is invalid')));
-                }
-                if(onSubmit != null){
-                  onSubmit!();
-                }
-              },
-              child: Text(buttonText ?? 'Submit' , style: buttonTextStyle),
-            ) : SizedBox.shrink(),
-          ],
+                onPressed: () {
+                  if (formKey != null && formKey!.currentState!.validate()) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.green,
+                      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 90),
+                      content: Text('Form is valid')));
+                      
+                    if(onSubmit != null){
+                      onSubmit!();
+                    }
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      behavior: SnackBarBehavior.floating,
+                      backgroundColor: Colors.red,
+                      margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 90),
+                      content: Text('Please fill in all required fields')));
+                  }
+                },
+                child: Text(buttonText ?? 'Submit' , style: buttonTextStyle),
+              ) : SizedBox.shrink(),
+            ],
+          ),
         ),
       ),
     );
