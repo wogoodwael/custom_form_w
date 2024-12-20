@@ -3,7 +3,7 @@ description: "Custom Form Widget With Validation Button"
 version: 0.0.1
 homepage: "https://github.com/wogoodwael/custom_form_w.git"
 Author: "Wogood wael "
-publish_to: "https://pub.flutter-io.cn"
+publish_to: "https://pub.dev/publishers/wogood.work.gd"
 environment:
   sdk: ^3.6.0
   flutter: ">=1.17.0"
