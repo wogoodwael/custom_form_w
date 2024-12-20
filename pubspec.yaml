@@ -1,6 +1,7 @@
 name: custom_form_w
 description: "Custom Form Widget With Validation Button"
 version: 0.0.1
+license: MIT
 homepage: "https://github.com/wogoodwael/custom_form_w.git"
 Author: "Wogood wael "
 publish_to: https://pub.dev
