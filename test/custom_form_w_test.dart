@@ -3,10 +3,16 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:custom_form_w/custom_form_w.dart';
 
 void main() {
-  test('adds one to input values', () {
-    final calculator = Calculator();
-    expect(calculator.addOne(2), 3);
-    expect(calculator.addOne(-7), -6);
-    expect(calculator.addOne(0), 1);
+  test('test custom form widget', () {
+    final customForm = CustomFormW(
+      numberOfFields: 2,
+      requiredFieldIndices: [1, 2],
+      labelText: ['Name', 'Email'],
+    ); 
+    expect(customForm.numberOfFields, 2);
+    expect(customForm.requiredFieldIndices, [1, 2]);
+    expect(customForm.labelText, ['Name', 'Email']);
+    
+
   });
 }
