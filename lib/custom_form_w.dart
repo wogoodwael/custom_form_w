@@ -80,7 +80,7 @@ class CustomFormW extends StatelessWidget {
                     labelText:withoutBorder == true ? null:'${labelText[index]}${requiredFieldIndices.contains(index+1) ? ' *' : ''}',
                     labelStyle:  labelStyle ?? TextStyle(color: requiredFieldIndices.contains(index+1) ? requiredColor ?? Colors.red : labelColor ?? Colors.black   ),
                     hintText:hintText?[index] ?? 'Enter ${labelText[index]}',
-                    hintStyle: hintStyle ?? TextStyle(color: Colors.grey.withOpacity(0.5)),
+                    hintStyle: hintStyle ?? TextStyle(color: Colors.grey.withValues(alpha: 0.5)),
                     hintTextDirection: textDirection,
                     filled: true,
                     fillColor:fillColor,
@@ -89,11 +89,11 @@ class CustomFormW extends StatelessWidget {
                     border: withoutBorder == true ? InputBorder.none : OutlineInputBorder(),
                     enabledBorder: withoutBorder == true ? InputBorder.none : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(radius ?? 10),
-                      borderSide: BorderSide(color: enabledBorderColor ?? Colors.grey.withOpacity(0.5)),
+                      borderSide: BorderSide(color: enabledBorderColor ?? Colors.grey.withValues(alpha: 0.5)),
                     ),
                     focusedBorder: withoutBorder == true ? InputBorder.none : OutlineInputBorder(
                       borderRadius: BorderRadius.circular(radius ?? 10),
-                      borderSide: BorderSide(color: focusedBorderColor ?? Colors.grey.withOpacity(0.5)),
+                      borderSide: BorderSide(color: focusedBorderColor ?? Colors.grey.withValues(alpha: 0.5)),
                     ),
                   ),
                   validator: (value) {
@@ -123,7 +123,6 @@ class CustomFormW extends StatelessWidget {
                     backgroundColor: Colors.green,
                     margin: EdgeInsets.only(bottom: MediaQuery.of(context).size.height - 90),
                     content: Text('Form is valid')));
-                  print('Form is valid');
                 }else{
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                     behavior: SnackBarBehavior.floating,
