@@ -103,7 +103,8 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^0.0.2
+  custom_form_w: ^1.0.0
 ```
-## Then run `flutter pub get`
+## Then run 
+`flutter pub get`
 
