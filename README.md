@@ -1,68 +1,31 @@
 # CustomFormW
 
 A flexible and customizable form widget for Flutter that allows for dynamic form creation with validation, custom labels, styling, and more.
+## Screenshots
+![CustomFormW Example](screenshots/image_one.jpeg)
+![CustomFormW Example](screenshots/image_two.jpeg)
+![CustomFormW Example](screenshots/image_three.jpeg)
 ## Example
 ```dart
 import 'package:custom_form_w/custom_form_w.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Custom Form Widget',
-      home: MyHomePage(),
-    );
-  }
-}
-
-class MyHomePage extends StatelessWidget {
-  MyHomePage({super.key});
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey[100],
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Center(
-            child: CustomFormW(
-              formKey: _formKey, 
-              onSubmit: () {
-                print('Submitted');
-              },
-              numberOfFields: 5,
-              requiredFieldIndices: [1, 2, 4],
-              labelText: ['Name', 'Email', 'Phone', 'Address', 'City'],
-              // Added some optional parameters 
-              fillColor: Colors.white,
-              buttonColor: Colors.blue,
-              radius: 8,
-              spacing: 15,
-              keyboardType: [
-                TextInputType.name,
-                TextInputType.emailAddress,
-                TextInputType.phone,
-                TextInputType.streetAddress,
-                TextInputType.text
-              ],
-            ),
-          ),
-        ],
+  runApp(
+    MaterialApp(
+      home: Scaffold(
+        body: CustomFormW(
+          numberOfFields: 3,
+          requiredFieldIndices: [1, 2],
+          labelText: ['Name', 'Email', 'Phone'],
+          onSubmit: () {
+            print('Form submitted');
+          },
+        ),
       ),
-    );
-  }
+    ),
+  );
 }
-
 ```
 ## Features
 - Create dynamic forms with a specified number of fields.
@@ -93,17 +56,14 @@ class MyHomePage extends StatelessWidget {
 - enabledBorderColor, focusedBorderColor: Optional - Colors for input field borders.
 - hintStyle: Optional - TextStyle for the hint text.
 - hintText: Optional - List of hint texts for the fields.
-## Screenshots
-![Screenshot](https://github.com/wogoodwael/custom_form_w/blob/main/image_one.jpeg)
-![Screenshot](https://github.com/wogoodwael/custom_form_w/blob/main/image_two.jpeg)
-![Screenshot](https://github.com/wogoodwael/custom_form_w/blob/main/image_three.jpeg)
+
 ## Installation
 
 Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^1.0.0
+  custom_form_w: ^1.1.0
 ```
 ## Then run 
 `flutter pub get`
