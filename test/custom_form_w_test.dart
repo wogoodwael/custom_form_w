@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:custom_form_w/custom_form_w.dart';
@@ -12,7 +13,7 @@ void main() {
     expect(customForm.numberOfFields, 2);
     expect(customForm.requiredFieldIndices, [1, 2]);
     expect(customForm.labelText, ['Name', 'Email']);
-    
+    expect(customForm.keyboardType, [TextInputType.text, TextInputType.emailAddress]);
 
   });
 }
