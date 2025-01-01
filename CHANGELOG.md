@@ -4,4 +4,10 @@
 * Add Screenshots
 * Add more features
 
+## 2.0.1
+
+* fix  suffixIcon bug make it work with list
+* fix  prefixIcon bug make it work with list
+
+
 

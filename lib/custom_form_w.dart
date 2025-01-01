@@ -47,8 +47,8 @@ class CustomFormW extends StatefulWidget {
   final String? buttonText;
   final Color? buttonColor;
   final TextStyle? buttonTextStyle;
-  final Widget? suffixIcon;
-  final Widget? prefixIcon;
+  final List<Widget>? suffixIcon;
+  final List<Widget>? prefixIcon;
   final List<TextInputType>? keyboardType;
   final TextStyle? labelStyle;
   final Color? requiredColor;
@@ -184,8 +184,8 @@ class _CustomFormWState extends State<CustomFormW> {
                                             });
                                           },
                                         )
-                                      : widget.suffixIcon,
-                                  prefixIcon: widget.prefixIcon,
+                                      : widget.suffixIcon?[index],
+                                  prefixIcon: widget.prefixIcon?[index],
                                   border: widget.withoutBorder == true
                                       ? InputBorder.none
                                       : OutlineInputBorder(),

@@ -59,6 +59,16 @@ class MyHomePage extends StatelessWidget {
                   TextInputType.text,
                   TextInputType.text,
                 ],
+                  suffixIcon: [
+                  Icon(Icons.person),
+                  Icon(Icons.email),
+                  Icon(Icons.phone),
+                  //if you want to hide the icon just pass null
+                  Icon(null),
+                  Icon(null),
+                  Icon(null),
+                  Icon(Icons.location_city),
+                ],
               ),
             ],
           ),

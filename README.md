@@ -33,6 +33,16 @@ void main() {
                   TextInputType.text,
                   TextInputType.text,
                 ],
+                suffixIcon: [
+                  Icon(Icons.person),
+                  Icon(Icons.email),
+                  Icon(Icons.phone),
+                  //if you want to hide the icon just pass null
+                  Icon(null),
+                  Icon(null),
+                  Icon(null),
+                  Icon(Icons.location_city),
+                ],
         ),
       ),
     ),
@@ -87,7 +97,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.0 
+  custom_form_w: ^2.0.1
 ```
 ## Then run 
 `flutter pub get`
