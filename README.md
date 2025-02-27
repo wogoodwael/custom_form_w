@@ -71,7 +71,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.2
+  custom_form_w: ^2.0.3
 ```
 ## Then run 
 `flutter pub get`
