@@ -22,7 +22,11 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
-  final _formKey = GlobalKey<FormState>();
+final formKey = GlobalKey<FormState>();
+  final nameController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -33,43 +37,46 @@ class MyHomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              CustomFormW(
-                showValidationSnackBar: false,
-                formKey: _formKey,
+       CustomFormW(
+                formKey: formKey,
+                buttonText: 'Register',
                 onSubmit: () {
-                  print('Submitted');
+                  // Handle form submission
+                  print('Name: ${nameController.text}');
+                  print('Email: ${emailController.text}');
+                  print('Password: ${passwordController.text}');
                 },
-                numberOfFields: 7,
-                requiredFieldIndices: [2, 3, 4, 5],
-                labelText: [
-                  'Name',
-                  'Email',
-                  'Phone',
-                  'Password',
-                  'Confirm Password',
-                  'Address',
-                  'City',
+                children: [
+                  CustomTextField(
+                    label: 'Full Name',
+                    controller: nameController,
+                    isRequired: true,
+                    prefixIcon: Icon(Icons.person),
+                  ),
+                  CustomTextField(
+                    label: 'Email',
+                    controller: emailController,
+                    isRequired: true,
+                    type: CustomTextFieldType.email,
+                    prefixIcon: Icon(Icons.email),
+                  ),
+                  CustomTextField(
+                    label: 'Password',
+                    controller: passwordController,
+                    isRequired: true,
+                    type: CustomTextFieldType.password,
+                    prefixIcon: Icon(Icons.lock),
+                  ),
+                  CustomTextField(
+                    label: 'Confirm Password',
+                    controller: confirmPasswordController,
+                    isRequired: true,
+                    type: CustomTextFieldType.password,
+                    isConfirmPassword: true,
+                    prefixIcon: Icon(Icons.lock_outline),
+                  ),
                 ],
-                keyboardType: [
-                  TextInputType.text,
-                  TextInputType.emailAddress,
-                  TextInputType.phone,
-                  TextInputType.visiblePassword,
-                  TextInputType.visiblePassword,
-                  TextInputType.text,
-                  TextInputType.text,
-                ],
-                  suffixIcon: [
-                  Icon(Icons.person),
-                  Icon(Icons.email),
-                  Icon(Icons.phone),
-                  //if you want to hide the icon just pass null
-                  Icon(null),
-                  Icon(null),
-                  Icon(null),
-                  Icon(Icons.location_city),
-                ],
-              ),
+              )
             ],
           ),
         ),

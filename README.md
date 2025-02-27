@@ -2,102 +2,74 @@
 
 A flexible and customizable form widget for Flutter that allows for dynamic form creation with validation, custom labels, styling, and more.
 ## Screenshots
-![CustomFormW Example](screenshots/image_one.jpeg)
-![CustomFormW Example](screenshots/image_two.jpeg)
-![CustomFormW Example](screenshots/image_three.jpeg)
-![CustomFormW Example](screenshots/image_four.jpeg) 
-![CustomFormW Example](screenshots/image_five.jpeg) 
-## Example
-```dart
-import 'package:custom_form_w/custom_form_w.dart';
-import 'package:flutter/material.dart';
+![CustomFormW Example](screenshots/image_one.png)
+![CustomFormW Example](screenshots/image_two.png)
+![CustomFormW Example](screenshots/image_three.png)
+![CustomFormW Example](screenshots/image_four.png)
+![CustomFormW Example](screenshots/image_five.png)
 
-void main() {
-  runApp(
-    MaterialApp(
-      home: Scaffold(
-        body: CustomFormW(
-          numberOfFields: 3,
-          requiredFieldIndices: [1, 2],
-          labelText: ['Name', 'Email', 'Phone'],
-          onSubmit: () {
-            print('Form submitted');
-          },
-          //for email validation , password length validation and phone number validation
-          keyboardType: [
-                  TextInputType.text,
-                  TextInputType.emailAddress,
-                  TextInputType.phone,
-                  TextInputType.visiblePassword,
-                  TextInputType.visiblePassword,
-                  TextInputType.text,
-                  TextInputType.text,
-                ],
-                suffixIcon: [
-                  Icon(Icons.person),
-                  Icon(Icons.email),
-                  Icon(Icons.phone),
-                  //if you want to hide the icon just pass null
-                  Icon(null),
-                  Icon(null),
-                  Icon(null),
-                  Icon(Icons.location_city),
-                ],
-        ),
-      ),
-    ),
-  );
-}
-```
+
 ## Features
-- Create dynamic forms with a specified number of fields.
-- Highlight required fields with asterisks (*).
-- Customize field labels, hints, and styles.
-- Supports multiple input types (e.g., text, email).
-- Easy-to-use validation for required fields.
-- Configurable submit button with custom text, color, and action.
-- Customizable border styles and form layout.
-- Optional submit button visibility.
-- Optional validation snackbar.
-- Optional phone number validation.
-- Optional email validation.
-- Optional password length validation.
-- Optional validation snackbar text.
+- Create dynamic forms with customizable text fields
+- Add informational or instructional text before each field
+- Allow users to add their own custom text above fields
+- Highlight required fields with visual indicators
+- Customize field labels, hints, and styles
+- Support multiple input types (text, email, password, phone, number)
+- Built-in validation for required fields, emails, passwords, and phone numbers
+- Configurable submit button with custom text, color, and action
+- Customizable border styles and form layout
+- Optional submit button visibility
+- Optional validation snackbar
+- Password confirmation validation
+- RTL language support
 ## Parameters:
-- numberOfFields: Required - Number of fields in the form.    
-- requiredFieldIndices: Required - List of indices (1-based) of required fields.
-- labelText: Required - List of labels for each field.
-- controllers: Required - List of TextEditingController for managing text input.
-- formKey: Optional - A GlobalKey<FormState> for form validation.
-- buttonText: Optional - Text for the submit button (default: 'Submit').
-- buttonColor: Optional - Color for the submit button (default: Colors.blue).
-- buttonTextStyle: Optional - Style for the submit button text (default: TextStyle(color: Colors.white)).
-- suffixIcon, prefixIcon: Optional - Widgets for icons that appear at the end or start of the input fields.
-- keyboardType: Optional - List of keyboard types for each input field (e.g., TextInputType.emailAddress).
-- labelStyle: Optional - TextStyle for labels.
-- requiredColor, labelColor: Optional - Color options for the labels.
-- radius: Optional - Border radius for input fields (default: 10.0).
-- onSubmit: Optional - Callback function for form submission.
-- showButton: Optional - Whether to show the submit button (default: true).
-- spacing: Optional - Spacing between fields (default: 10.0).
-- enabledBorderColor, focusedBorderColor: Optional - Colors for input field borders.
-- hintStyle: Optional - TextStyle for the hint text.
-- hintText: Optional - List of hint texts for the fields.
-- validationSnackBarText: Optional - Text for the validation snackbar (default: 'Form is valid'). 
-- phoneRegex: Optional - Regex for phone number validation (default: r'^\d{10}$').
-- phoneRegexError: Optional - Error message for phone number validation (default: 'Please enter a valid 10-digit phone number').
-- emailRegex: Optional - Regex for email validation (default: r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$').
-- emailRegexError: Optional - Error message for email validation (default: 'Please enter a valid email address').
-- passwordLength: Optional - Minimum length for password validation (default: 8).
-- passwordLengthError: Optional - Error message for password length validation (default: 'Password must be at least 8 characters long').
 
+• children: Required - List of CustomTextField widgets
+• formKey: Optional - A GlobalKey<FormState> for form validation
+• buttonText: Optional - Text for the submit button (default: 'Submit')
+• buttonColor: Optional - Color for the submit button (default: Colors.blue)
+• buttonTextStyle: Optional - Style for the submit button text (default: TextStyle(color: Colors.white))
+onSubmit: Optional - Callback function for form submission
+• showButton: Optional - Whether to show the submit button (default: true)
+• spacing: Optional - Spacing between fields (default: 10.0)
+• validationSnackBarText: Optional - Text for the validation snackbar (default: 'Form is valid')
+• showValidationSnackBar: Optional - Whether to show the validation snackbar (default: true)
+• padding: Optional - Padding for the form (default: EdgeInsets.symmetric(horizontal: 16))
+
+CustomTextField Parameters:
+
+• label: Required - Label text for the field
+• hint: Optional - Hint text for the field
+• controller: Optional - TextEditingController for managing text input
+• isRequired: Optional - Whether the field is required (default: false)
+• type: Optional - Type of field (text, email, password, phone, number) (default: CustomTextFieldType.text)
+• withoutBorder: Optional - Whether to show a border around the field (default: false)
+• textDirection: Optional - Text direction for the field (default: TextDirection.ltr)
+• fillColor: Optional - Background color for the field (default: Colors.white)
+• prefixIcon: Optional - Icon to show at the start of the field
+• suffixIcon: Optional - Icon to show at the end of the field
+• labelStyle: Optional - Style for the label text
+• requiredColor: Optional - Color for required field indicator (default: Colors.red)
+• labelColor: Optional - Color for label text (default: Colors.black)
+• radius: Optional - Border radius for the field (default: 10.0)
+• enabledBorderColor: Optional - Color for the field border when enabled
+• focusedBorderColor: Optional - Color for the field border when focused
+• hintStyle: Optional - Style for the hint text
+• phoneRegex: Optional - Regex for phone number validation (default: r'^\d{10}$')
+• phoneRegexError: Optional - Error message for phone number validation
+• passwordLength: Optional - Minimum length for password validation (default: 8)
+• isConfirmPassword: Optional - Whether this field is for password confirmation (default: false)
+• headerText: Optional - Text to display above the field
+• headerTextStyle: Optional - Style for the headerText 
+• crossAxisOfHeaderText : Optional - Space between headerText and TextField
 ## Installation
 
 Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.1
+  custom_form_w: ^2.0.2
 ```
 ## Then run 
 `flutter pub get`

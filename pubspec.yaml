@@ -1,21 +1,21 @@
 name: custom_form_w
 description: "Custom Form Widget With Validation Button and more features "
-version: 2.0.1
+version: 2.0.2
 license: MIT
 homepage: "https://github.com/wogoodwael/custom_form_w.git"
 Author: "Wogood wael "
 # publish_to: 'https://pub.dev'
 screenshots:
   - description: 'CustomFormW Example 1'
-    path: "screenshots/image_one.jpeg"
+    path: "screenshots/image_one.png"
   - description: 'CustomFormW Example 2'
-    path: "screenshots/image_two.jpeg"
+    path: "screenshots/image_two.png"
   - description: 'CustomFormW Example 3'
-    path: "screenshots/image_three.jpeg"
+    path: "screenshots/image_three.png"
   - description: 'CustomFormW Example 4'
-    path: "screenshots/image_four.jpeg"
+    path: "screenshots/image_four.png"
   - description: 'CustomFormW Example 5'
-    path: "screenshots/image_five.jpeg"
+    path: "screenshots/image_five.png"
 environment:
   sdk: ^3.6.0
   flutter: ">=1.17.0"

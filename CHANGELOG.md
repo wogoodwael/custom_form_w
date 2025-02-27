@@ -9,5 +9,10 @@
 * fix  suffixIcon bug make it work with list
 * fix  prefixIcon bug make it work with list
 
+## 2.0.2
+
+* add more features
+
+
 
 
