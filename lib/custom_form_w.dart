@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
-
 class CustomFormW extends StatefulWidget {
   const CustomFormW({
     super.key,
@@ -60,7 +59,6 @@ class _CustomFormState extends State<CustomFormW> {
                       (index) {
                         final childWidget = widget.children[index];
 
-                        
                         return Padding(
                             padding: EdgeInsets.only(bottom: widget.spacing),
                             child: Column(
@@ -147,7 +145,6 @@ class _CustomFormState extends State<CustomFormW> {
   }
 }
 
-
 enum CustomTextFieldType {
   text,
   email,
@@ -155,7 +152,6 @@ enum CustomTextFieldType {
   phone,
   number,
 }
-
 
 class CustomTextField extends StatefulWidget {
   const CustomTextField(
@@ -165,7 +161,7 @@ class CustomTextField extends StatefulWidget {
       this.controller,
       this.isRequired = false,
       this.type = CustomTextFieldType.text,
-      this.withoutBorder = false,
+      this.withoutLabel = false,
       this.textDirection = TextDirection.ltr,
       this.fillColor = Colors.white,
       this.prefixIcon,
@@ -185,14 +181,14 @@ class CustomTextField extends StatefulWidget {
       this.onPasswordChanged,
       this.headerText,
       this.headerTextStyle,
-      this.crossAxisOfHeaderText});
+      this.crossAxisOfHeaderText ,  this.readOnly=false});
 
   final String label;
   final String? hint;
   final TextEditingController? controller;
   final bool isRequired;
   final CustomTextFieldType type;
-  final bool withoutBorder;
+  final bool withoutLabel;
   final TextDirection textDirection;
   final Color fillColor;
   final Widget? prefixIcon;
@@ -211,11 +207,10 @@ class CustomTextField extends StatefulWidget {
   final String? headerText;
   final CrossAxisAlignment? crossAxisOfHeaderText;
   final TextStyle? headerTextStyle;
-  
+  final bool? readOnly;
   final String? parentPassword;
   final Function(String)? onPasswordChanged;
 
-  
   CustomTextField copyWith({
     String? parentPassword,
     Function(String)? onPasswordChanged,
@@ -226,7 +221,7 @@ class CustomTextField extends StatefulWidget {
         controller: controller,
         isRequired: isRequired,
         type: type,
-        withoutBorder: withoutBorder,
+        withoutLabel: withoutLabel,
         textDirection: textDirection,
         fillColor: fillColor,
         prefixIcon: prefixIcon,
@@ -246,7 +241,9 @@ class CustomTextField extends StatefulWidget {
         onPasswordChanged: onPasswordChanged ?? this.onPasswordChanged,
         headerText: headerText,
         headerTextStyle: headerTextStyle,
-        crossAxisOfHeaderText: crossAxisOfHeaderText);
+        crossAxisOfHeaderText: crossAxisOfHeaderText, 
+        readOnly: readOnly,
+        );
   }
 
   @override
@@ -271,11 +268,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       decoration: _buildInputDecoration(),
       initialCountryCode: 'EG',
-      onChanged: (phone) {
-        
-        
-      },
-      
+      onChanged: (phone) {},
       onSaved: (phone) {
         if (widget.controller != null && phone != null) {
           widget.controller!.text = phone.completeNumber;
@@ -286,6 +279,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildTextField() {
     return TextFormField(
+      readOnly:widget. readOnly ??false,
       controller: widget.controller,
       keyboardType: _getKeyboardType(),
       textDirection: widget.textDirection,
@@ -305,7 +299,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   InputDecoration _buildInputDecoration() {
     return InputDecoration(
-      labelText: widget.withoutBorder ? null : widget.label,
+      labelText: widget.withoutLabel ? null : widget.label,
       labelStyle: widget.labelStyle ??
           TextStyle(
             color: widget.isRequired ? widget.requiredColor : widget.labelColor,
@@ -331,25 +325,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
             )
           : widget.suffixIcon,
       prefixIcon: widget.prefixIcon,
-      border: widget.withoutBorder ? InputBorder.none : OutlineInputBorder(),
-      enabledBorder: widget.withoutBorder
-          ? InputBorder.none
-          : OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.radius),
-              borderSide: BorderSide(
-                color:
-                    widget.enabledBorderColor ?? Colors.grey.withOpacity(0.5),
-              ),
-            ),
-      focusedBorder: widget.withoutBorder
-          ? InputBorder.none
-          : OutlineInputBorder(
-              borderRadius: BorderRadius.circular(widget.radius),
-              borderSide: BorderSide(
-                color:
-                    widget.focusedBorderColor ?? Colors.grey.withOpacity(0.5),
-              ),
-            ),
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(widget.radius),
+        borderSide: BorderSide(
+          color: widget.enabledBorderColor ?? Colors.grey.withOpacity(0.5),
+        ),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(widget.radius),
+        borderSide: BorderSide(
+          color: widget.enabledBorderColor ?? Colors.grey.withOpacity(0.5),
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(widget.radius),
+        borderSide: BorderSide(
+          color: widget.focusedBorderColor ?? Colors.grey.withOpacity(0.5),
+        ),
+      ),
     );
   }
 
@@ -369,14 +362,12 @@ class _CustomTextFieldState extends State<CustomTextField> {
   }
 
   String? _validateField(String? value) {
-    
     if (widget.isRequired && (value == null || value.isEmpty)) {
       return widget.textDirection == TextDirection.rtl
           ? 'من فضلك ادخل ${widget.label}'
           : ' Please enter ${widget.label}';
     }
 
-    
     switch (widget.type) {
       case CustomTextFieldType.email:
         if (value != null && value.isNotEmpty) {

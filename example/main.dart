@@ -52,6 +52,8 @@ final formKey = GlobalKey<FormState>();
                     controller: nameController,
                     isRequired: true,
                     prefixIcon: Icon(Icons.person),
+                    withoutLabel: true,//if you do not wanna label 
+                    readOnly: true, // if u wanna the text field be read only 
                   ),
                   CustomTextField(
                     label: 'Email',

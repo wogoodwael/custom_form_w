@@ -2,12 +2,18 @@
 
 A flexible and customizable form widget for Flutter that allows for dynamic form creation with validation, custom labels, styling, and more.
 
+
 ## Screenshots
-![CustomFormW Example](screenshots/image_one.png)
-![CustomFormW Example](screenshots/image_two.png)
-![CustomFormW Example](screenshots/image_three.png)
-![CustomFormW Example](screenshots/image_four.png)
-![CustomFormW Example](screenshots/image_five.png)
+
+Here are some screenshots of the application:
+
+| Screenshot 1 | Screenshot 2 |
+|-------------|-------------|
+| ![Screenshot 1](screenshots/image_one.png) | ![Screenshot 2](screenshots/image_two.png) |
+| Screenshot 3 | Screenshot 4 |
+| ![Screenshot 3](screenshots/image_three.png) | ![Screenshot 4](screenshots/image_four.png) |
+| Screenshot 5 |
+| ![Screenshot 5](screenshots/image_five.png) |
 
 ## Features
 - Create dynamic forms with customizable text fields
@@ -45,7 +51,7 @@ A flexible and customizable form widget for Flutter that allows for dynamic form
 - **controller** (Optional): TextEditingController for managing text input
 - **isRequired** (Optional): Whether the field is required (default: false)
 - **type** (Optional): Type of field (text, email, password, phone, number) (default: CustomTextFieldType.text)
-- **withoutBorder** (Optional): Whether to show a border around the field (default: false)
+- **withoutLavel** (Optional): Whether to show a label or not (default: false)
 - **textDirection** (Optional): Text direction for the field (default: TextDirection.ltr)
 - **fillColor** (Optional): Background color for the field (default: Colors.white)
 - **prefixIcon** (Optional): Icon to show at the start of the field
@@ -64,6 +70,7 @@ A flexible and customizable form widget for Flutter that allows for dynamic form
 - **headerText** (Optional): Text to display above the field
 - **headerTextStyle** (Optional): Style for the headerText
 - **crossAxisOfHeaderText** (Optional): Space between headerText and TextField
+- **readOnly** (Optional): Make the textField readOnly
 
 ## Installation
 
@@ -71,7 +78,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.3
+  custom_form_w: ^2.0.4
 ```
 ## Then run 
 `flutter pub get`

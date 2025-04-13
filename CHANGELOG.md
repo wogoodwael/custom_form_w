@@ -14,5 +14,10 @@
 * add more features
 
 
+## 2.0.4
+
+* add readOnly feature
+
+
 
 
