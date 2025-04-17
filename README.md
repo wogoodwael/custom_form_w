@@ -44,9 +44,10 @@ Here are some screenshots of the application:
 - **validationSnackBarText** (Optional): Text for the validation snackbar (default: 'Form is valid')
 - **showValidationSnackBar** (Optional): Whether to show the validation snackbar (default: true)
 - **padding** (Optional): Padding for the form (default: EdgeInsets.symmetric(horizontal: 16))
+- **buttonShape** (Optional): Custom Shape for your button
 
 ### CustomTextField Parameters
-- **label** (Required): Label text for the field
+- **label** (Optional): Label text for the field
 - **hint** (Optional): Hint text for the field
 - **controller** (Optional): TextEditingController for managing text input
 - **isRequired** (Optional): Whether the field is required (default: false)
@@ -71,6 +72,7 @@ Here are some screenshots of the application:
 - **headerTextStyle** (Optional): Style for the headerText
 - **crossAxisOfHeaderText** (Optional): Space between headerText and TextField
 - **readOnly** (Optional): Make the textField readOnly
+- **visibiltyColor** (Optional): Make Custom color for your visibilty icon 
 
 ## Installation
 
@@ -78,7 +80,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.4
+  custom_form_w: ^2.0.5
 ```
 ## Then run 
 `flutter pub get`

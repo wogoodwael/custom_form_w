@@ -18,6 +18,13 @@
 
 * add readOnly feature
 
+## 2.0.5
+
+* Solve visibilty Icon bug
+* Add visibilty Icon color
+* Label Not Required
+* Add shape to your button
+
 
 
 

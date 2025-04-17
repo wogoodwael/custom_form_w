@@ -16,6 +16,7 @@ class CustomFormW extends StatefulWidget {
     this.showValidationSnackBar = true,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.spaceHeaders = 5,
+    this.buttonShape
   });
 
   final List<CustomTextField> children;
@@ -30,6 +31,7 @@ class CustomFormW extends StatefulWidget {
   final String? validationSnackBarText;
   final bool showValidationSnackBar;
   final EdgeInsetsGeometry padding;
+  final ShapeBorder? buttonShape;
 
   @override
   State<CustomFormW> createState() => _CustomFormState();
@@ -98,9 +100,10 @@ class _CustomFormState extends State<CustomFormW> {
                   minWidth: .9 * MediaQuery.of(context).size.width,
                   height: 45,
                   color: widget.buttonColor,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(5),
-                  ),
+                  shape: widget.buttonShape ??
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
                   onPressed: () {
                     final formKey = widget.formKey ?? _formKey;
                     if (formKey.currentState!.validate()) {
@@ -156,7 +159,7 @@ enum CustomTextFieldType {
 class CustomTextField extends StatefulWidget {
   const CustomTextField(
       {super.key,
-      required this.label,
+      this.label,
       this.hint,
       this.controller,
       this.isRequired = false,
@@ -181,9 +184,11 @@ class CustomTextField extends StatefulWidget {
       this.onPasswordChanged,
       this.headerText,
       this.headerTextStyle,
-      this.crossAxisOfHeaderText ,  this.readOnly=false});
+      this.crossAxisOfHeaderText,
+      this.readOnly = false,
+      this.visibiltyColor});
 
-  final String label;
+  final String? label;
   final String? hint;
   final TextEditingController? controller;
   final bool isRequired;
@@ -210,40 +215,42 @@ class CustomTextField extends StatefulWidget {
   final bool? readOnly;
   final String? parentPassword;
   final Function(String)? onPasswordChanged;
+  final Color? visibiltyColor;
 
   CustomTextField copyWith({
     String? parentPassword,
     Function(String)? onPasswordChanged,
   }) {
     return CustomTextField(
-        label: label,
-        hint: hint,
-        controller: controller,
-        isRequired: isRequired,
-        type: type,
-        withoutLabel: withoutLabel,
-        textDirection: textDirection,
-        fillColor: fillColor,
-        prefixIcon: prefixIcon,
-        suffixIcon: suffixIcon,
-        labelStyle: labelStyle,
-        requiredColor: requiredColor,
-        labelColor: labelColor,
-        radius: radius,
-        enabledBorderColor: enabledBorderColor,
-        focusedBorderColor: focusedBorderColor,
-        hintStyle: hintStyle,
-        phoneRegex: phoneRegex,
-        phoneRegexError: phoneRegexError,
-        passwordLength: passwordLength,
-        isConfirmPassword: isConfirmPassword,
-        parentPassword: parentPassword ?? this.parentPassword,
-        onPasswordChanged: onPasswordChanged ?? this.onPasswordChanged,
-        headerText: headerText,
-        headerTextStyle: headerTextStyle,
-        crossAxisOfHeaderText: crossAxisOfHeaderText, 
-        readOnly: readOnly,
-        );
+      label: label,
+      hint: hint,
+      controller: controller,
+      isRequired: isRequired,
+      type: type,
+      withoutLabel: withoutLabel,
+      textDirection: textDirection,
+      fillColor: fillColor,
+      prefixIcon: prefixIcon,
+      suffixIcon: suffixIcon,
+      labelStyle: labelStyle,
+      requiredColor: requiredColor,
+      labelColor: labelColor,
+      radius: radius,
+      enabledBorderColor: enabledBorderColor,
+      focusedBorderColor: focusedBorderColor,
+      hintStyle: hintStyle,
+      phoneRegex: phoneRegex,
+      phoneRegexError: phoneRegexError,
+      passwordLength: passwordLength,
+      isConfirmPassword: isConfirmPassword,
+      parentPassword: parentPassword ?? this.parentPassword,
+      onPasswordChanged: onPasswordChanged ?? this.onPasswordChanged,
+      headerText: headerText,
+      headerTextStyle: headerTextStyle,
+      crossAxisOfHeaderText: crossAxisOfHeaderText,
+      readOnly: readOnly,
+      visibiltyColor: visibiltyColor,
+    );
   }
 
   @override
@@ -279,7 +286,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildTextField() {
     return TextFormField(
-      readOnly:widget. readOnly ??false,
+      readOnly: widget.readOnly ?? false,
       controller: widget.controller,
       keyboardType: _getKeyboardType(),
       textDirection: widget.textDirection,
@@ -316,7 +323,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
       suffixIcon: widget.type == CustomTextFieldType.password
           ? IconButton(
               icon: Icon(
-                  _passwordVisible ? Icons.visibility_off : Icons.visibility),
+                _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                color: widget.visibiltyColor,
+              ),
               onPressed: () {
                 setState(() {
                   _passwordVisible = !_passwordVisible;

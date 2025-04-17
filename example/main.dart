@@ -38,9 +38,11 @@ final formKey = GlobalKey<FormState>();
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
        CustomFormW(
+                buttonShape: BeveledRectangleBorder(), //shape for your button
                 formKey: formKey,
                 buttonText: 'Register',
                 onSubmit: () {
+                  
                   // Handle form submission
                   print('Name: ${nameController.text}');
                   print('Email: ${emailController.text}');
@@ -48,7 +50,8 @@ final formKey = GlobalKey<FormState>();
                 },
                 children: [
                   CustomTextField(
-                    label: 'Full Name',
+                    label: 'Full Name',//optional 
+
                     controller: nameController,
                     isRequired: true,
                     prefixIcon: Icon(Icons.person),
@@ -65,6 +68,7 @@ final formKey = GlobalKey<FormState>();
                   CustomTextField(
                     label: 'Password',
                     controller: passwordController,
+                    visibiltyColor: Colors.grey,
                     isRequired: true,
                     type: CustomTextFieldType.password,
                     prefixIcon: Icon(Icons.lock),
