@@ -73,6 +73,11 @@ Here are some screenshots of the application:
 - **crossAxisOfHeaderText** (Optional): Space between headerText and TextField
 - **readOnly** (Optional): Make the textField readOnly
 - **visibiltyColor** (Optional): Make Custom color for your visibilty icon 
+- **contentPadding** (Optional): Make Custom padding for your TextField
+- **showCountryFlag** (Optional): Show country flag for phone number input (default: true)
+- **dropDownIcon** (Optional): Custom icon for dropdown (default: Icons.arrow_drop_down)
+
+
 
 ## Installation
 
@@ -80,7 +85,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.5
+  custom_form_w: ^2.0.6
 ```
 ## Then run 
 `flutter pub get`

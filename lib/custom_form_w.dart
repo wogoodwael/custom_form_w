@@ -178,6 +178,8 @@ class CustomTextField extends StatefulWidget {
       this.hintStyle,
       this.phoneRegex = r'^\d{10}$',
       this.phoneRegexError = 'Please enter a valid 10-digit phone number',
+    this.passwordRegex,
+    this.passwordRegexError,
       this.passwordLength = 8,
       this.isConfirmPassword = false,
       this.parentPassword,
@@ -186,7 +188,11 @@ class CustomTextField extends StatefulWidget {
       this.headerTextStyle,
       this.crossAxisOfHeaderText,
       this.readOnly = false,
-      this.visibiltyColor});
+    this.visibiltyColor,
+    this.dropDownIcon,
+    this.contentPadding,
+    this.showCountryFlag = true,
+  });
 
   final String? label;
   final String? hint;
@@ -207,6 +213,8 @@ class CustomTextField extends StatefulWidget {
   final TextStyle? hintStyle;
   final String phoneRegex;
   final String phoneRegexError;
+  final String? passwordRegex;
+  final String? passwordRegexError;
   final int passwordLength;
   final bool isConfirmPassword;
   final String? headerText;
@@ -216,6 +224,9 @@ class CustomTextField extends StatefulWidget {
   final String? parentPassword;
   final Function(String)? onPasswordChanged;
   final Color? visibiltyColor;
+  final Icon? dropDownIcon;
+  final EdgeInsetsGeometry? contentPadding;
+  final bool? showCountryFlag;
 
   CustomTextField copyWith({
     String? parentPassword,
@@ -241,6 +252,8 @@ class CustomTextField extends StatefulWidget {
       hintStyle: hintStyle,
       phoneRegex: phoneRegex,
       phoneRegexError: phoneRegexError,
+      passwordRegex: passwordRegex,
+      passwordRegexError: passwordRegexError,
       passwordLength: passwordLength,
       isConfirmPassword: isConfirmPassword,
       parentPassword: parentPassword ?? this.parentPassword,
@@ -250,6 +263,9 @@ class CustomTextField extends StatefulWidget {
       crossAxisOfHeaderText: crossAxisOfHeaderText,
       readOnly: readOnly,
       visibiltyColor: visibiltyColor,
+      dropDownIcon: dropDownIcon,
+      contentPadding: contentPadding,
+      showCountryFlag: showCountryFlag,
     );
   }
 
@@ -272,6 +288,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildPhoneField() {
     return IntlPhoneField(
+      showDropdownIcon: true,
+      showCountryFlag: widget.showCountryFlag ?? true,
+      dropdownIcon: widget.dropDownIcon ?? Icon(Icons.arrow_drop_down),
       controller: widget.controller,
       decoration: _buildInputDecoration(),
       initialCountryCode: 'EG',
@@ -286,6 +305,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildTextField() {
     return TextFormField(
+      
       readOnly: widget.readOnly ?? false,
       controller: widget.controller,
       keyboardType: _getKeyboardType(),
@@ -352,6 +372,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           color: widget.focusedBorderColor ?? Colors.grey.withOpacity(0.5),
         ),
       ),
+        contentPadding: widget.contentPadding ?? EdgeInsets.zero
     );
   }
 
@@ -393,20 +414,27 @@ class _CustomTextFieldState extends State<CustomTextField> {
               return 'Passwords do not match';
             }
           } else {
-            if (value.length < widget.passwordLength) {
-              return 'Password must be at least ${widget.passwordLength} characters';
-            }
-            if (!RegExp(r'(?=.*?[A-Z])').hasMatch(value)) {
-              return 'Password must contain at least one uppercase letter';
-            }
-            if (!RegExp(r'(?=.*?[a-z])').hasMatch(value)) {
-              return 'Password must contain at least one lowercase letter';
-            }
-            if (!RegExp(r'(?=.*?[0-9])').hasMatch(value)) {
-              return 'Password must contain at least one number';
-            }
-            if (!RegExp(r'(?=.*?[!@#\$&*~])').hasMatch(value)) {
-              return 'Password must contain at least one special character';
+            if (widget.passwordRegex != null) {
+              if (!RegExp(widget.passwordRegex!).hasMatch(value)) {
+                return widget.passwordRegexError ??
+                    'Password does not meet the requirements';
+              }
+            } else {
+              if (value.length < widget.passwordLength) {
+                return 'Password must be at least ${widget.passwordLength} characters';
+              }
+              if (!RegExp(r'(?=.*?[A-Z])').hasMatch(value)) {
+                return 'Password must contain at least one uppercase letter';
+              }
+              if (!RegExp(r'(?=.*?[a-z])').hasMatch(value)) {
+                return 'Password must contain at least one lowercase letter';
+              }
+              if (!RegExp(r'(?=.*?[0-9])').hasMatch(value)) {
+                return 'Password must contain at least one number';
+              }
+              if (!RegExp(r'(?=.*?[!@#\$&*~])').hasMatch(value)) {
+                return 'Password must contain at least one special character';
+              }
             }
           }
         }

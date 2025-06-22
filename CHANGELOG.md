@@ -26,5 +26,13 @@
 * Add shape to your button
 
 
+## 2.0.6
+
+* Add content padding 
+* Add show country flag attribute 
+* Customize drop down phone  Icon 
+
+
+
 
 

@@ -27,6 +27,7 @@ final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
+  final phoneController  = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +65,7 @@ final formKey = GlobalKey<FormState>();
                     isRequired: true,
                     type: CustomTextFieldType.email,
                     prefixIcon: Icon(Icons.email),
+                    contentPadding: EdgeInsets.all(10),// if you wanna add content padding 
                   ),
                   CustomTextField(
                     label: 'Password',
@@ -78,6 +80,16 @@ final formKey = GlobalKey<FormState>();
                     controller: confirmPasswordController,
                     isRequired: true,
                     type: CustomTextFieldType.password,
+                    isConfirmPassword: true,
+                    prefixIcon: Icon(Icons.lock_outline),
+                  ),
+                  CustomTextField(
+                    label: 'phone ',
+                    controller: phoneController,
+                    isRequired: true,
+                    type: CustomTextFieldType.phone,
+                    showCountryFlag: false, //if you do not want to show country flag  ,
+                    dropDownIcon: Icon(Icons.keyboard_arrow_down_outlined),
                     isConfirmPassword: true,
                     prefixIcon: Icon(Icons.lock_outline),
                   ),
