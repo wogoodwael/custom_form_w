@@ -178,8 +178,8 @@ class CustomTextField extends StatefulWidget {
       this.hintStyle,
       this.phoneRegex = r'^\d{10}$',
       this.phoneRegexError = 'Please enter a valid 10-digit phone number',
-    this.passwordRegex,
-    this.passwordRegexError,
+      this.passwordRegex,
+      this.passwordRegexError,
       this.passwordLength = 8,
       this.isConfirmPassword = false,
       this.parentPassword,
@@ -188,10 +188,12 @@ class CustomTextField extends StatefulWidget {
       this.headerTextStyle,
       this.crossAxisOfHeaderText,
       this.readOnly = false,
-    this.visibiltyColor,
-    this.dropDownIcon,
-    this.contentPadding,
-    this.showCountryFlag = true,
+      this.visibiltyColor,
+      this.dropDownIcon,
+      this.contentPadding,
+      this.showCountryFlag = true,
+      this.maxLength,
+      this.maxLines,
   });
 
   final String? label;
@@ -227,10 +229,14 @@ class CustomTextField extends StatefulWidget {
   final Icon? dropDownIcon;
   final EdgeInsetsGeometry? contentPadding;
   final bool? showCountryFlag;
+  final int? maxLength;
+  final int? maxLines;
 
   CustomTextField copyWith({
     String? parentPassword,
     Function(String)? onPasswordChanged,
+    int? maxLength,
+    int? maxLines,
   }) {
     return CustomTextField(
       label: label,
@@ -266,6 +272,8 @@ class CustomTextField extends StatefulWidget {
       dropDownIcon: dropDownIcon,
       contentPadding: contentPadding,
       showCountryFlag: showCountryFlag,
+      maxLength: maxLength ?? this.maxLength,
+      maxLines: maxLines ?? this.maxLines,
     );
   }
 
@@ -305,7 +313,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   Widget _buildTextField() {
     return TextFormField(
-      
       readOnly: widget.readOnly ?? false,
       controller: widget.controller,
       keyboardType: _getKeyboardType(),
@@ -321,6 +328,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
           widget.onPasswordChanged!(value);
         }
       },
+      maxLength: widget.maxLength,
+      maxLines: widget.maxLines,
     );
   }
 
@@ -372,7 +381,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           color: widget.focusedBorderColor ?? Colors.grey.withOpacity(0.5),
         ),
       ),
-        contentPadding: widget.contentPadding ?? EdgeInsets.zero
+      contentPadding: widget.contentPadding ?? EdgeInsets.zero
     );
   }
 

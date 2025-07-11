@@ -33,6 +33,10 @@
 * Customize drop down phone  Icon 
 
 
+## 2.0.7
+
+* Add maxLines
+* Add maxLength
 
 
 

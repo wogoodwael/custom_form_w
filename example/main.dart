@@ -52,6 +52,8 @@ final formKey = GlobalKey<FormState>();
                 children: [
                   CustomTextField(
                     label: 'Full Name',//optional 
+maxLines: 2,// if you wanna customize the max lines 
+maxLength: 1,// if you wanna customize the max lenght  
 
                     controller: nameController,
                     isRequired: true,

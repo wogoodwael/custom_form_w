@@ -76,6 +76,8 @@ Here are some screenshots of the application:
 - **contentPadding** (Optional): Make Custom padding for your TextField
 - **showCountryFlag** (Optional): Show country flag for phone number input (default: true)
 - **dropDownIcon** (Optional): Custom icon for dropdown (default: Icons.arrow_drop_down)
+- **maxLines** (Optional): Custom maxLines
+- **maxLenght** (Optional): Custom maxLenght
 
 
 
@@ -85,7 +87,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.6
+  custom_form_w: ^2.0.7
 ```
 ## Then run 
 `flutter pub get`
