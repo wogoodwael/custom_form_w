@@ -38,5 +38,9 @@
 * Add maxLines
 * Add maxLength
 
+## 2.0.8
+
+* Add all text field functions like onChange , onTap etc 
+
 
 

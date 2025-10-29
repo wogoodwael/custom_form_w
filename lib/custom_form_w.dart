@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 
 class CustomFormW extends StatefulWidget {
@@ -194,6 +195,22 @@ class CustomTextField extends StatefulWidget {
       this.showCountryFlag = true,
       this.maxLength,
       this.maxLines,
+      // All TextField Callbacks
+      this.onChanged,
+      this.onTap,
+      this.onEditingComplete,
+      this.onFieldSubmitted,
+      this.onSaved,
+      this.focusNode,
+      this.inputFormatters,
+      this.autofocus = false,
+      this.enableSuggestions = true,
+      this.enableInteractiveSelection = true,
+      this.textInputAction,
+      this.textCapitalization = TextCapitalization.none,
+      this.autovalidateMode,
+      this.cursorColor,
+      this.style
   });
 
   final String? label;
@@ -232,11 +249,44 @@ class CustomTextField extends StatefulWidget {
   final int? maxLength;
   final int? maxLines;
 
+  // Newly added full TextField features
+  final ValueChanged<String>? onChanged;
+  final GestureTapCallback? onTap;
+  final VoidCallback? onEditingComplete;
+  final ValueChanged<String>? onFieldSubmitted;
+  final FormFieldSetter<String>? onSaved;
+  final FocusNode? focusNode;
+  final List<TextInputFormatter>? inputFormatters;
+  final bool autofocus;
+  final bool enableSuggestions;
+  final bool enableInteractiveSelection;
+  final TextInputAction? textInputAction;
+  final TextCapitalization textCapitalization;
+  final AutovalidateMode? autovalidateMode;
+  final Color? cursorColor;
+  final TextStyle? style;
+
   CustomTextField copyWith({
     String? parentPassword,
     Function(String)? onPasswordChanged,
     int? maxLength,
     int? maxLines,
+    // Also copy the new TextFormField features for true copying
+    ValueChanged<String>? onChanged,
+    GestureTapCallback? onTap,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onFieldSubmitted,
+    FormFieldSetter<String>? onSaved,
+    FocusNode? focusNode,
+    List<TextInputFormatter>? inputFormatters,
+    bool? autofocus,
+    bool? enableSuggestions,
+    bool? enableInteractiveSelection,
+    TextInputAction? textInputAction,
+    TextCapitalization? textCapitalization,
+    AutovalidateMode? autovalidateMode,
+    Color? cursorColor,
+    TextStyle? style,
   }) {
     return CustomTextField(
       label: label,
@@ -274,6 +324,22 @@ class CustomTextField extends StatefulWidget {
       showCountryFlag: showCountryFlag,
       maxLength: maxLength ?? this.maxLength,
       maxLines: maxLines ?? this.maxLines,
+      // Add all newly added fields
+      onChanged: onChanged ?? this.onChanged,
+      onTap: onTap ?? this.onTap,
+      onEditingComplete: onEditingComplete ?? this.onEditingComplete,
+      onFieldSubmitted: onFieldSubmitted ?? this.onFieldSubmitted,
+      onSaved: onSaved ?? this.onSaved,
+      focusNode: focusNode ?? this.focusNode,
+      inputFormatters: inputFormatters ?? this.inputFormatters,
+      autofocus: autofocus ?? this.autofocus,
+      enableSuggestions: enableSuggestions ?? this.enableSuggestions,
+      enableInteractiveSelection: enableInteractiveSelection ?? this.enableInteractiveSelection,
+      textInputAction: textInputAction ?? this.textInputAction,
+      textCapitalization: textCapitalization ?? this.textCapitalization,
+      autovalidateMode: autovalidateMode ?? this.autovalidateMode,
+      cursorColor: cursorColor ?? this.cursorColor,
+      style: style ?? this.style,
     );
   }
 
@@ -302,12 +368,25 @@ class _CustomTextFieldState extends State<CustomTextField> {
       controller: widget.controller,
       decoration: _buildInputDecoration(),
       initialCountryCode: 'EG',
-      onChanged: (phone) {},
+      onChanged: (phone) {
+        // You can handle phone changes here or use widget.onChanged if needed
+        if (widget.onChanged != null) {
+          widget.onChanged!(phone.completeNumber);
+        }
+      },
       onSaved: (phone) {
         if (widget.controller != null && phone != null) {
           widget.controller!.text = phone.completeNumber;
         }
+        if (widget.onSaved != null && phone != null) {
+          widget.onSaved!(phone.completeNumber);
+        }
       },
+      onTap: widget.onTap,
+      focusNode: widget.focusNode,
+      autovalidateMode: widget.autovalidateMode,
+      // IntlPhoneField does not support many TextFormField callbacks,
+      // so add only what is supported here.
     );
   }
 
@@ -327,7 +406,24 @@ class _CustomTextFieldState extends State<CustomTextField> {
             widget.onPasswordChanged != null) {
           widget.onPasswordChanged!(value);
         }
+        if (widget.onChanged != null) {
+          widget.onChanged!(value);
+        }
       },
+      onTap: widget.onTap,
+      onEditingComplete: widget.onEditingComplete,
+      onFieldSubmitted: widget.onFieldSubmitted,
+      onSaved: widget.onSaved,
+      focusNode: widget.focusNode,
+      inputFormatters: widget.inputFormatters,
+      autofocus: widget.autofocus,
+      enableSuggestions: widget.enableSuggestions,
+      enableInteractiveSelection: widget.enableInteractiveSelection,
+      textInputAction: widget.textInputAction,
+      textCapitalization: widget.textCapitalization,
+      autovalidateMode: widget.autovalidateMode,
+      cursorColor: widget.cursorColor,
+      style: widget.style,
       maxLength: widget.maxLength,
       maxLines: widget.maxLines,
     );
