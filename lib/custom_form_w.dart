@@ -17,7 +17,19 @@ class CustomFormW extends StatefulWidget {
     this.showValidationSnackBar = true,
     this.padding = const EdgeInsets.symmetric(horizontal: 16),
     this.spaceHeaders = 5,
-    this.buttonShape
+    this.buttonShape,
+    // ---- Shared field styling, now lives on the form and applies to ALL children ----
+    this.radius = 10,
+    this.fillColor = Colors.white,
+    this.enabledBorderColor,
+    this.focusedBorderColor,
+    this.labelColor = Colors.black,
+    this.requiredColor = Colors.red,
+    this.withoutLabel = false,
+    this.labelStyle,
+    this.hintStyle,
+    this.style,
+    this.iconSize = 24,
   });
 
   final List<CustomTextField> children;
@@ -33,6 +45,19 @@ class CustomFormW extends StatefulWidget {
   final bool showValidationSnackBar;
   final EdgeInsetsGeometry padding;
   final ShapeBorder? buttonShape;
+
+  // ---- Shared field styling (form-level, applied to every CustomTextField) ----
+  final double radius;
+  final Color fillColor;
+  final Color? enabledBorderColor;
+  final Color? focusedBorderColor;
+  final Color labelColor;
+  final Color requiredColor;
+  final bool withoutLabel;
+  final TextStyle? labelStyle;
+  final TextStyle? hintStyle;
+  final TextStyle? style;
+  final double iconSize;
 
   @override
   State<CustomFormW> createState() => _CustomFormState();
@@ -88,6 +113,18 @@ class _CustomFormState extends State<CustomFormW> {
                                       _password = value;
                                     }
                                   },
+                                  // ---- Apply form-level styling to every field ----
+                                  radius: widget.radius,
+                                  fillColor: widget.fillColor,
+                                  enabledBorderColor: widget.enabledBorderColor,
+                                  focusedBorderColor: widget.focusedBorderColor,
+                                  labelColor: widget.labelColor,
+                                  requiredColor: widget.requiredColor,
+                                  withoutLabel: widget.withoutLabel,
+                                  labelStyle: widget.labelStyle,
+                                  hintStyle: widget.hintStyle,
+                                  style: widget.style,
+                                  iconSize: widget.iconSize,
                                 ),
                               ],
                             ));
@@ -158,59 +195,62 @@ enum CustomTextFieldType {
 }
 
 class CustomTextField extends StatefulWidget {
-  const CustomTextField(
-      {super.key,
-      this.label,
-      this.hint,
-      this.controller,
-      this.isRequired = false,
-      this.type = CustomTextFieldType.text,
-      this.withoutLabel = false,
-      this.textDirection = TextDirection.ltr,
-      this.fillColor = Colors.white,
-      this.prefixIcon,
-      this.suffixIcon,
-      this.labelStyle,
-      this.requiredColor = Colors.red,
-      this.labelColor = Colors.black,
-      this.radius = 10,
-      this.enabledBorderColor,
-      this.focusedBorderColor,
-      this.hintStyle,
-      this.phoneRegex = r'^\d{10}$',
-      this.phoneRegexError = 'Please enter a valid 10-digit phone number',
-      this.passwordRegex,
-      this.passwordRegexError,
-      this.passwordLength = 8,
-      this.isConfirmPassword = false,
-      this.parentPassword,
-      this.onPasswordChanged,
-      this.headerText,
-      this.headerTextStyle,
-      this.crossAxisOfHeaderText,
-      this.readOnly = false,
-      this.visibiltyColor,
-      this.dropDownIcon,
-      this.contentPadding,
-      this.showCountryFlag = true,
-      this.maxLength,
-      this.maxLines,
-      // All TextField Callbacks
-      this.onChanged,
-      this.onTap,
-      this.onEditingComplete,
-      this.onFieldSubmitted,
-      this.onSaved,
-      this.focusNode,
-      this.inputFormatters,
-      this.autofocus = false,
-      this.enableSuggestions = true,
-      this.enableInteractiveSelection = true,
-      this.textInputAction,
-      this.textCapitalization = TextCapitalization.none,
-      this.autovalidateMode,
-      this.cursorColor,
-      this.style
+  const CustomTextField({
+    super.key,
+    this.label,
+    this.hint,
+    this.controller,
+    this.isRequired = false,
+    this.type = CustomTextFieldType.text,
+    this.prefixIcon,
+    this.suffixIcon,
+    this.phoneRegex = r'^\d{10}$',
+    this.phoneRegexError = 'Please enter a valid 10-digit phone number',
+    this.passwordRegex,
+    this.passwordRegexError,
+    this.passwordLength = 8,
+    this.isConfirmPassword = false,
+    this.parentPassword,
+    this.onPasswordChanged,
+    this.headerText,
+    this.headerTextStyle,
+    this.crossAxisOfHeaderText,
+    this.readOnly = false,
+    this.visibiltyColor,
+    this.dropDownIcon,
+    this.contentPadding,
+    this.showCountryFlag = true,
+    this.maxLength,
+    this.maxLines = 1,
+    // All TextField Callbacks
+    this.onChanged,
+    this.onTap,
+    this.onEditingComplete,
+    this.onFieldSubmitted,
+    this.onSaved,
+    this.focusNode,
+    this.inputFormatters,
+    this.autofocus = false,
+    this.enableSuggestions = true,
+    this.enableInteractiveSelection = true,
+    this.textInputAction,
+    this.textCapitalization = TextCapitalization.none,
+    this.autovalidateMode,
+    this.cursorColor,
+    this.textDirection = TextDirection.ltr,
+    // ---- These are now meant to be set by CustomFormW via copyWith,
+    // not directly on an individual field, so every field in the form matches ----
+    this.radius = 10,
+    this.fillColor = Colors.white,
+    this.enabledBorderColor,
+    this.focusedBorderColor,
+    this.labelColor = Colors.black,
+    this.requiredColor = Colors.red,
+    this.withoutLabel = false,
+    this.labelStyle,
+    this.hintStyle,
+    this.style,
+    this.iconSize = 24,
   });
 
   final String? label;
@@ -218,18 +258,9 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController? controller;
   final bool isRequired;
   final CustomTextFieldType type;
-  final bool withoutLabel;
   final TextDirection textDirection;
-  final Color fillColor;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
-  final TextStyle? labelStyle;
-  final Color requiredColor;
-  final Color labelColor;
-  final double radius;
-  final Color? enabledBorderColor;
-  final Color? focusedBorderColor;
-  final TextStyle? hintStyle;
   final String phoneRegex;
   final String phoneRegexError;
   final String? passwordRegex;
@@ -264,7 +295,19 @@ class CustomTextField extends StatefulWidget {
   final TextCapitalization textCapitalization;
   final AutovalidateMode? autovalidateMode;
   final Color? cursorColor;
+
+  // ---- Shared field styling — driven by CustomFormW ----
+  final double radius;
+  final Color fillColor;
+  final Color? enabledBorderColor;
+  final Color? focusedBorderColor;
+  final Color labelColor;
+  final Color requiredColor;
+  final bool withoutLabel;
+  final TextStyle? labelStyle;
+  final TextStyle? hintStyle;
   final TextStyle? style;
+  final double iconSize;
 
   CustomTextField copyWith({
     String? parentPassword,
@@ -287,6 +330,17 @@ class CustomTextField extends StatefulWidget {
     AutovalidateMode? autovalidateMode,
     Color? cursorColor,
     TextStyle? style,
+    // Shared/form-level styling overrides
+    double? radius,
+    Color? fillColor,
+    Color? enabledBorderColor,
+    Color? focusedBorderColor,
+    Color? labelColor,
+    Color? requiredColor,
+    bool? withoutLabel,
+    TextStyle? labelStyle,
+    TextStyle? hintStyle,
+    double? iconSize,
   }) {
     return CustomTextField(
       label: label,
@@ -294,18 +348,9 @@ class CustomTextField extends StatefulWidget {
       controller: controller,
       isRequired: isRequired,
       type: type,
-      withoutLabel: withoutLabel,
       textDirection: textDirection,
-      fillColor: fillColor,
       prefixIcon: prefixIcon,
       suffixIcon: suffixIcon,
-      labelStyle: labelStyle,
-      requiredColor: requiredColor,
-      labelColor: labelColor,
-      radius: radius,
-      enabledBorderColor: enabledBorderColor,
-      focusedBorderColor: focusedBorderColor,
-      hintStyle: hintStyle,
       phoneRegex: phoneRegex,
       phoneRegexError: phoneRegexError,
       passwordRegex: passwordRegex,
@@ -334,12 +379,24 @@ class CustomTextField extends StatefulWidget {
       inputFormatters: inputFormatters ?? this.inputFormatters,
       autofocus: autofocus ?? this.autofocus,
       enableSuggestions: enableSuggestions ?? this.enableSuggestions,
-      enableInteractiveSelection: enableInteractiveSelection ?? this.enableInteractiveSelection,
+      enableInteractiveSelection:
+          enableInteractiveSelection ?? this.enableInteractiveSelection,
       textInputAction: textInputAction ?? this.textInputAction,
       textCapitalization: textCapitalization ?? this.textCapitalization,
       autovalidateMode: autovalidateMode ?? this.autovalidateMode,
       cursorColor: cursorColor ?? this.cursorColor,
       style: style ?? this.style,
+      // Shared/form-level styling
+      radius: radius ?? this.radius,
+      fillColor: fillColor ?? this.fillColor,
+      enabledBorderColor: enabledBorderColor ?? this.enabledBorderColor,
+      focusedBorderColor: focusedBorderColor ?? this.focusedBorderColor,
+      labelColor: labelColor ?? this.labelColor,
+      requiredColor: requiredColor ?? this.requiredColor,
+      withoutLabel: withoutLabel ?? this.withoutLabel,
+      labelStyle: labelStyle ?? this.labelStyle,
+      hintStyle: hintStyle ?? this.hintStyle,
+      iconSize: iconSize ?? this.iconSize,
     );
   }
 
@@ -349,6 +406,12 @@ class CustomTextField extends StatefulWidget {
 
 class _CustomTextFieldState extends State<CustomTextField> {
   bool _passwordVisible = false;
+
+  // Password fields are always single-line — forcing this here (rather than
+  // just relying on the default) prevents the obscureText + multiline
+  // crash/error even if a caller passes a larger maxLines by mistake.
+  int get _effectiveMaxLines =>
+      widget.type == CustomTextFieldType.password ? 1 : (widget.maxLines ?? 1);
 
   @override
   Widget build(BuildContext context) {
@@ -363,8 +426,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
   Widget _buildPhoneField() {
     return IntlPhoneField(
       showDropdownIcon: true,
-      showCountryFlag: widget.showCountryFlag ?? true,
-      dropdownIcon: widget.dropDownIcon ?? Icon(Icons.arrow_drop_down),
+      showCountryFlag: true,
+      dropdownIcon: widget.dropDownIcon ??
+          Icon(Icons.arrow_drop_down, size: widget.iconSize),
       controller: widget.controller,
       decoration: _buildInputDecoration(),
       initialCountryCode: 'EG',
@@ -425,7 +489,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
       cursorColor: widget.cursorColor,
       style: widget.style,
       maxLength: widget.maxLength,
-      maxLines: widget.maxLines,
+      maxLines: _effectiveMaxLines,
     );
   }
 
@@ -450,6 +514,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               icon: Icon(
                 _passwordVisible ? Icons.visibility : Icons.visibility_off,
                 color: widget.visibiltyColor,
+                size: widget.iconSize,
               ),
               onPressed: () {
                 setState(() {
@@ -457,8 +522,18 @@ class _CustomTextFieldState extends State<CustomTextField> {
                 });
               },
             )
-          : widget.suffixIcon,
-      prefixIcon: widget.prefixIcon,
+          : (widget.suffixIcon != null
+              ? IconTheme(
+                  data: IconThemeData(size: widget.iconSize),
+                  child: widget.suffixIcon!,
+                )
+              : null),
+      prefixIcon: widget.prefixIcon != null
+          ? IconTheme(
+              data: IconThemeData(size: widget.iconSize),
+              child: widget.prefixIcon!,
+            )
+          : null,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(widget.radius),
         borderSide: BorderSide(
@@ -477,7 +552,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
           color: widget.focusedBorderColor ?? Colors.grey.withOpacity(0.5),
         ),
       ),
-      contentPadding: widget.contentPadding ?? EdgeInsets.zero
+      contentPadding: widget.contentPadding ?? EdgeInsets.zero,
     );
   }
 

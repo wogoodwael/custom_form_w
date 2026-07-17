@@ -1,5 +1,3 @@
-
-
 import 'package:custom_form_w/custom_form_w.dart';
 import 'package:flutter/material.dart';
 
@@ -22,12 +20,12 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
-final formKey = GlobalKey<FormState>();
+  final formKey = GlobalKey<FormState>();
   final nameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
-  final phoneController  = TextEditingController();
+  final phoneController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -38,12 +36,13 @@ final formKey = GlobalKey<FormState>();
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-       CustomFormW(
+              CustomFormW(
+                iconSize: 20,
+                withoutLabel: true,
                 buttonShape: BeveledRectangleBorder(), //shape for your button
                 formKey: formKey,
                 buttonText: 'Register',
                 onSubmit: () {
-                  
                   // Handle form submission
                   print('Name: ${nameController.text}');
                   print('Email: ${emailController.text}');
@@ -51,15 +50,15 @@ final formKey = GlobalKey<FormState>();
                 },
                 children: [
                   CustomTextField(
-                    label: 'Full Name',//optional 
-maxLines: 2,// if you wanna customize the max lines 
-maxLength: 1,// if you wanna customize the max lenght  
+                    label: 'Full Name', //optional
+                    maxLines: 2, // if you wanna customize the max lines
+                    maxLength: 1, // if you wanna customize the max lenght
 
                     controller: nameController,
                     isRequired: true,
                     prefixIcon: Icon(Icons.person),
-                    withoutLabel: true,//if you do not wanna label 
-                    readOnly: true, // if u wanna the text field be read only 
+                    withoutLabel: true, //if you do not wanna label
+                    readOnly: true, // if u wanna the text field be read only
                   ),
                   CustomTextField(
                     label: 'Email',
@@ -67,7 +66,8 @@ maxLength: 1,// if you wanna customize the max lenght
                     isRequired: true,
                     type: CustomTextFieldType.email,
                     prefixIcon: Icon(Icons.email),
-                    contentPadding: EdgeInsets.all(10),// if you wanna add content padding 
+                    contentPadding:
+                        EdgeInsets.all(10), // if you wanna add content padding
                   ),
                   CustomTextField(
                     label: 'Password',
@@ -90,7 +90,8 @@ maxLength: 1,// if you wanna customize the max lenght
                     controller: phoneController,
                     isRequired: true,
                     type: CustomTextFieldType.phone,
-                    showCountryFlag: false, //if you do not want to show country flag  ,
+                    showCountryFlag:
+                        false, //if you do not want to show country flag  ,
                     dropDownIcon: Icon(Icons.keyboard_arrow_down_outlined),
                     isConfirmPassword: true,
                     prefixIcon: Icon(Icons.lock_outline),
@@ -102,5 +103,5 @@ maxLength: 1,// if you wanna customize the max lenght
         ),
       ),
     );
-   }
+  }
 }

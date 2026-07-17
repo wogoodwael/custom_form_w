@@ -42,5 +42,11 @@
 
 * Add all text field functions like onChange , onTap etc 
 
+## 2.0.9
+
+* Move shared styling (radius, fillColor, enabledBorderColor, focusedBorderColor, labelColor, requiredColor, withoutLabel, labelStyle, hintStyle, style) from CustomTextField to CustomFormW so it's set once and applies to every field
+* Add iconSize to CustomFormW to control the size of prefixIcon, suffixIcon, the password visibility icon, and the phone dropdown icon
+* Fix password field maxLines bug (password fields are now forced to maxLines: 1 to prevent obscureText conflicts)
+
 
 

@@ -46,24 +46,29 @@ Here are some screenshots of the application:
 - **padding** (Optional): Padding for the form (default: EdgeInsets.symmetric(horizontal: 16))
 - **buttonShape** (Optional): Custom Shape for your button
 
+#### Shared field styling (form-level, applies to every field in `children`)
+These used to live on each `CustomTextField`; they now live on `CustomFormW` so you set them once and every field in the form matches.
+- **radius** (Optional): Border radius for every field (default: 10.0)
+- **fillColor** (Optional): Background color for every field (default: Colors.white)
+- **enabledBorderColor** (Optional): Border color when a field is enabled
+- **focusedBorderColor** (Optional): Border color when a field is focused
+- **labelColor** (Optional): Color for label text (default: Colors.black)
+- **requiredColor** (Optional): Color for the required-field label indicator (default: Colors.red)
+- **withoutLabel** (Optional): Whether to hide labels on all fields (default: false)
+- **labelStyle** (Optional): Style for the label text
+- **hintStyle** (Optional): Style for the hint text
+- **style** (Optional): Style for the input text itself
+- **iconSize** (Optional): Size applied to prefixIcon, suffixIcon, the password visibility icon, and the phone dropdown icon (default: 24.0)
+
 ### CustomTextField Parameters
 - **label** (Optional): Label text for the field
 - **hint** (Optional): Hint text for the field
 - **controller** (Optional): TextEditingController for managing text input
 - **isRequired** (Optional): Whether the field is required (default: false)
 - **type** (Optional): Type of field (text, email, password, phone, number) (default: CustomTextFieldType.text)
-- **withoutLavel** (Optional): Whether to show a label or not (default: false)
 - **textDirection** (Optional): Text direction for the field (default: TextDirection.ltr)
-- **fillColor** (Optional): Background color for the field (default: Colors.white)
 - **prefixIcon** (Optional): Icon to show at the start of the field
 - **suffixIcon** (Optional): Icon to show at the end of the field
-- **labelStyle** (Optional): Style for the label text
-- **requiredColor** (Optional): Color for required field indicator (default: Colors.red)
-- **labelColor** (Optional): Color for label text (default: Colors.black)
-- **radius** (Optional): Border radius for the field (default: 10.0)
-- **enabledBorderColor** (Optional): Color for the field border when enabled
-- **focusedBorderColor** (Optional): Color for the field border when focused
-- **hintStyle** (Optional): Style for the hint text
 - **phoneRegex** (Optional): Regex for phone number validation (default: r'^\d{10}$')
 - **phoneRegexError** (Optional): Error message for phone number validation
 - **passwordLength** (Optional): Minimum length for password validation (default: 8)
@@ -76,10 +81,10 @@ Here are some screenshots of the application:
 - **contentPadding** (Optional): Make Custom padding for your TextField
 - **showCountryFlag** (Optional): Show country flag for phone number input (default: true)
 - **dropDownIcon** (Optional): Custom icon for dropdown (default: Icons.arrow_drop_down)
-- **maxLines** (Optional): Custom maxLines
+- **maxLines** (Optional): Custom maxLines (default: 1; always forced to 1 for password fields)
 - **maxLenght** (Optional): Custom maxLenght
 
-
+> **Note:** `radius`, `fillColor`, `enabledBorderColor`, `focusedBorderColor`, `labelColor`, `requiredColor`, `withoutLabel`, `labelStyle`, `hintStyle`, `style`, and `iconSize` are no longer set per-field — set them once on `CustomFormW` instead (see above).
 
 ## Installation
 
@@ -87,7 +92,7 @@ Add this to your `pubspec.yaml` file:
 
 ```yaml
 dependencies:
-  custom_form_w: ^2.0.8
+  custom_form_w: ^2.0.9
 ```
 ## Then run 
 `flutter pub get`
